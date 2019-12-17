@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Projet3-CRUSSON</string>
+    <string name="menu_connexion" translatable="false">  Se connecter</string>
+    <string name="menu_list" translatable="false"> Liste des visites</string>
+    <string name="menu_import" translatable="false"> Importer les données</string>
+    <string name="menu_export"> Exporter les données</string>
+    <string name="menu_deconnexion" translatable="false"> Se déconnecter</string>
+
+    <string name="strLogin">Login :</string>
+    <string name="strPassword">Password :</string>
+    <string name="strIdentifiant">Identifiant</string>
+    <string name="strPasswordHint">Password</string>
+
+
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

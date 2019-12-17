@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Projet1 - Crusson</string>
+    <string name="action_settings">Settings</string>
+    <string name="messageAccueil"> Bonjour </string>
+    <string name="msg_bact1">Activité 1</string>
+    <string name="msg_bact2">Activité 2</string>
+    <string name="msg_bact3">Activité 3</string>
+    <string name="msg_bact4">Activité 4</string>
+
+    <string name="menu_act1">Acti1</string>
+    <string name="menu_act2">Acti2</string>
+    <string name="menu_act3">Acti3</string>
+    <string name="menu_act4">Acti4</string>
+    <string name="menu_act5">Acti5</string>
+
+</resources>
