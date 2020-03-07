@@ -50,9 +50,12 @@ public class Async extends AsyncTask<String, String, Boolean> {
 
                     ((MainActivity) activityAppelante.get()).retourConnexion(stringBuilder);
                 }
-            } else
+            } else if (classActivityAppelante.contains("ActImport")){
+                ((ActImport) activityAppelante.get()).retourImport(stringBuilder);
+            } else {
                 Toast.makeText(activityAppelante.get(), "Fin ko",
                         Toast.LENGTH_SHORT).show();
+            }
         }
 
     }

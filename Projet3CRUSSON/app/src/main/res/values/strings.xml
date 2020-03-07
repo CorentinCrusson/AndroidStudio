@@ -12,9 +12,8 @@
     <string name="strPasswordHint">Password</string>
 
 
-
-
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_act_import">ActImport</string>
 
 </resources>

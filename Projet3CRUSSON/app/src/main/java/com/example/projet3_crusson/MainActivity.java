@@ -2,6 +2,7 @@ package com.example.projet3_crusson;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -53,6 +54,9 @@ import org.json.JSONObject;
 public class MainActivity extends AppCompatActivity implements BlankFragment.OnFragmentInteractionListener{
     private Fragment leFragment;
     private ImageView limage;
+    private Intent i;
+
+    private Modele vmodele;
 
     public static final int ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE= 5469;
 
@@ -138,6 +142,9 @@ public class MainActivity extends AppCompatActivity implements BlankFragment.OnF
         super.onResume();
         checkPermissionAlert();
         checkPermissions();
+        //Create DataBase
+        vmodele = new Modele();
+        vmodele.createDirectory();
         /* VERIFICATION OVERLAY PERMISSION
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if(Settings.canDrawOverlays(this)) {
@@ -187,9 +194,16 @@ public class MainActivity extends AppCompatActivity implements BlankFragment.OnF
             case R.id.menu_list:
                 Toast.makeText(getApplicationContext(), "clic sur list", Toast.LENGTH_LONG).show();
 
+                i = new Intent(getApplicationContext(), AfficheListeVisite.class);
+                startActivity(i);
+
                 return true;
             case R.id.menu_import:
                 Toast.makeText(getApplicationContext(), "clic sur import", Toast.LENGTH_LONG).show();
+
+                i = new Intent(getApplicationContext(), ActImport.class);
+                startActivity(i);
+
 
                 return true;
             case R.id.menu_export:
