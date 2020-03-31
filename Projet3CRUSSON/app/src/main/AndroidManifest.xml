@@ -15,7 +15,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AfficheListeVisite"></activity>
+        <activity
+            android:name=".Map"
+            android:label="@string/title_activity_map"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".AfficheVisite"
+            android:label="@string/title_activity_affiche_visite"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".AfficheListeVisite" />
         <activity
             android:name=".ActImport"
             android:label="@string/title_activity_act_import"

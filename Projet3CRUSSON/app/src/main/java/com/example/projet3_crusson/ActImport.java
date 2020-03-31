@@ -33,6 +33,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class ActImport extends AppCompatActivity {
@@ -44,6 +45,8 @@ public class ActImport extends AppCompatActivity {
 
     private SharedPreferences myPrefs;
     private SharedPreferences.Editor prefsEditor;
+
+    private int idPatient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +85,7 @@ public class ActImport extends AppCompatActivity {
     public void retourImport(StringBuilder sb)
     {
         //alertmsg("retour Connexion", sb.toString());
+        ArrayList<Integer> lesPatients = new ArrayList<Integer>();
 
         try {
             Modele vmodel = new Modele();
@@ -91,6 +95,13 @@ public class ActImport extends AppCompatActivity {
             ArrayList<Visite> listeVisite = new ArrayList<Visite>();
 
             for (JsonElement obj : varray) {
+                if(obj.getAsJsonObject().has("patient")) {
+                    idPatient = obj.getAsJsonObject().get("patient").getAsInt();
+
+                    if (!lesPatients.contains(idPatient)) {
+                        lesPatients.add(idPatient);
+                    }
+                }
                 Visite visite = gson.fromJson(obj.getAsJsonObject(), Visite.class);
                 visite.setCompte_rendu_infirmiere("");
                 visite.setDate_reelle(visite.getDate_prevue());
@@ -99,6 +110,29 @@ public class ActImport extends AppCompatActivity {
             vmodel.deleteVisite();
             vmodel.addVisite(listeVisite);
 
+            vmodel.deletePatient();
+            //recherche patients pour les visites
+            for (Integer p : lesPatients) {
+                String[] mesparams = {"http://www.btssio-carcouet.fr/ppe4/public/personne/".concat(p.toString()), "Patient"};
+                mThreadCon = new AsyncPatient().execute(mesparams);
+                //Log.d("Patient", "appel"+p.toString());
+            }
+
+            vmodel.deleteVisiteSoin();
+            for (Visite v : listeVisite) {
+                String[] mesparams = {"http://www.btssio-carcouet.fr/ppe4/public/visitesoins/".concat(Integer.toString(v.getId())), "VisiteSoin"};
+                mThreadCon = new AsyncPatient().execute(mesparams);
+            }
+
+            if (vmodel.listeSoin().size()==0) {
+
+                String[] mesparams = {"http://www.btssio-carcouet.fr/ppe4/public/soins/", "Soin"};
+                mThreadCon = new AsyncPatient().execute(mesparams);
+            }
+
+            Gson gson = new GsonBuilder().registerTypeAdapter(Date.class, new DateDeserializer()).serializeNulls().create();
+
+
             alertmsg("Retour", "Vos informations ont bien été importé avec succès !");
         }
         catch (Exception e) {
@@ -106,6 +140,14 @@ public class ActImport extends AppCompatActivity {
             alertmsg("Erreur retour import", e.getMessage());
 
         }
+
+    }
+
+    public void retourImportPlus(StringBuilder sb, String demande) {
+        /*
+        if (demande.equals('')) {
+
+        }*/
 
     }
 
