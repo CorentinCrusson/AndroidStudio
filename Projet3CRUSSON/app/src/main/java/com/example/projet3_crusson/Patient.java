@@ -154,6 +154,47 @@ public class Patient {
         this.mail = mail;
     }
 
+    /*
+     *   Méthodes Spécifiques à la classe Patient
+     */
+
+    // Trouve un patient à partir de son id
+    public Patient trouvePatient(int id) {
+        open();
+        Patient vretour = new Patient();
+        vretour.setId(id);
+        ObjectSet<Patient> result = dataBase.queryByExample(vretour);
+        vretour = (Patient) result.next();
+        dataBase.close();
+        return vretour;
+    }
+
+    // deletePatient() qui permet de supprimer toutes les instances de la classe Patient
+    public void deletePatient() {
+        open();
+        ObjectSet<Patient> result = dataBase.queryByExample(Patient.class);
+        while (result.hasNext()) {
+            dataBase.delete(result.next());
+        }
+        dataBase.close();
+    }
+    // addPatient(ArrayList<Patient> vPatient) qui, à partir d'une collection de Patient, va les ajouter à DB4o. Nous ne testerons pas l'existence de ces objets puisque c'est une création (appel de la méthode après l'appel de deletePatient()).
+    public void addPatient(ArrayList<Patient> vPatient) {
+        open();
+        for (Patient v : vPatient) {
+            dataBase.store(v);
+        }
+        dataBase.close();
+    }
+
+    // Ajoute à DB4o un objet de la classe patient
+    public void addUnPatient(Patient vPatient) {
+        open();
+        dataBase.store(vPatient);
+
+        dataBase.close();
+    }
+
 
 }
 

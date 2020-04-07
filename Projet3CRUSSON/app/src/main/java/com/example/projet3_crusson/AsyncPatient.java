@@ -87,7 +87,7 @@ public class AsyncPatient extends AsyncTask<String, String, Boolean> {
     }
     @Override
     protected void onCancelled() {
-        //Toast.makeText(getApplicationContext(), "Annulation patient", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Annulation patient", Toast.LENGTH_SHORT).show();
     }
 }
 

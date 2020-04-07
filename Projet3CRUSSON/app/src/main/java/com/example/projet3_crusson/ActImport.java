@@ -85,7 +85,7 @@ public class ActImport extends AppCompatActivity {
     public void retourImport(StringBuilder sb)
     {
         //alertmsg("retour Connexion", sb.toString());
-        ArrayList<Integer> lesPatients = new ArrayList<Integer>();
+        ArrayList<Integer> listePatient = new ArrayList<Integer>();
 
         try {
             Modele vmodel = new Modele();
@@ -98,8 +98,8 @@ public class ActImport extends AppCompatActivity {
                 if(obj.getAsJsonObject().has("patient")) {
                     idPatient = obj.getAsJsonObject().get("patient").getAsInt();
 
-                    if (!lesPatients.contains(idPatient)) {
-                        lesPatients.add(idPatient);
+                    if (!listePatient.contains(idPatient)) {
+                        listePatient.add(idPatient);
                     }
                 }
                 Visite visite = gson.fromJson(obj.getAsJsonObject(), Visite.class);
@@ -112,7 +112,7 @@ public class ActImport extends AppCompatActivity {
 
             vmodel.deletePatient();
             //recherche patients pour les visites
-            for (Integer p : lesPatients) {
+            for (Integer p : listePatient) {
                 String[] mesparams = {"http://www.btssio-carcouet.fr/ppe4/public/personne/".concat(p.toString()), "Patient"};
                 mThreadCon = new AsyncPatient().execute(mesparams);
                 //Log.d("Patient", "appel"+p.toString());
@@ -130,9 +130,6 @@ public class ActImport extends AppCompatActivity {
                 mThreadCon = new AsyncPatient().execute(mesparams);
             }
 
-            Gson gson = new GsonBuilder().registerTypeAdapter(Date.class, new DateDeserializer()).serializeNulls().create();
-
-
             alertmsg("Retour", "Vos informations ont bien été importé avec succès !");
         }
         catch (Exception e) {
@@ -144,10 +141,22 @@ public class ActImport extends AppCompatActivity {
     }
 
     public void retourImportPlus(StringBuilder sb, String demande) {
-        /*
-        if (demande.equals('')) {
 
-        }*/
+        Gson gson = new GsonBuilder().registerTypeAdapter(Date.class, new DateDeserializer()).serializeNulls().create();
+
+        switch(demande) {
+            case "Patient":
+                Patient pat = null;
+                pat.add(gson.fromJson(obj.getAsJsonObject(), Patient.class));
+                break;
+            case "VisiteSoin":
+
+                break;
+
+            case "Patient":
+
+                break;
+        }
 
     }
 

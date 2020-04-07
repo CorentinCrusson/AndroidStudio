@@ -1,1 +1,1 @@
-include ':app', ':gson'
+include ':app', ':gson', ':osmdroid', ':osmdroid-android-6.1.6-release-sources'
