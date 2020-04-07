@@ -49,10 +49,13 @@ public class Async extends AsyncTask<String, String, Boolean> {
                 if (classActivityAppelante.contains("MainActivity")) {
 
                     ((MainActivity) activityAppelante.get()).retourConnexion(stringBuilder);
+                } else if (classActivityAppelante.contains("ActImport")){
+                    ((ActImport) activityAppelante.get()).retourImport(stringBuilder);
                 }
-            } else
+            } else {
                 Toast.makeText(activityAppelante.get(), "Fin ko",
                         Toast.LENGTH_SHORT).show();
+            }
         }
 
     }
@@ -67,7 +70,7 @@ public class Async extends AsyncTask<String, String, Boolean> {
             URL url = new URL(vurl);
             urlConnection = (HttpURLConnection) url.openConnection();
 
-            if (!classActivityAppelante.contains("MainActivity")) {
+            if (!classActivityAppelante.contains("MainActivity") && !classActivityAppelante.contains("ActImport")) {
                 urlConnection
                         .setRequestProperty("Content-Type", "application/json");
                 urlConnection.setRequestProperty("Accept", "application/json");
